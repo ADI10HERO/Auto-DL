@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import pymongo
+import ssl
 from urllib.parse import urlparse
 from corsheaders.defaults import default_headers
 
@@ -87,6 +89,7 @@ WSGI_APPLICATION = "BackEndApp.wsgi.application"
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {"default": {"ENGINE": "django.db.backends.dummy"}}
+DBCLIENT = pymongo.MongoClient(os.getenv("MONGODB_URI"), ssl_cert_reqs=ssl.CERT_NONE)
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOWED_ORIGINS = [HOST, FRONTEND_HOST, "http://localhost:8000"]

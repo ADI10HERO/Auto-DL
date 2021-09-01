@@ -1,6 +1,7 @@
 import os
 import ssl
 import pymongo
+from django.conf import settings
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -20,9 +21,7 @@ def connect(db_name="auth_db"):
     db : object
         database client connection object
     """
-    client = pymongo.MongoClient(os.getenv("MONGODB_URI"), ssl_cert_reqs=ssl.CERT_NONE)
-    db = client[db_name]
-    print("MongoDB connected")
+    db = settings.DBCLIENT[db_name]
     return db
 
 
